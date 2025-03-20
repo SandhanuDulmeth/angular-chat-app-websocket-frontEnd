@@ -8,7 +8,7 @@
         rgba(0, 0, 0, 0.03) 21px
     );
   }
-  
+
   /* Custom scrollbar for messages area */
   ::-webkit-scrollbar {
     width: 8px;

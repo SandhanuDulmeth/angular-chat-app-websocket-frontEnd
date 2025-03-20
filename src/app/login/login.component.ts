@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../shared/auth.service';
+
 @Component({
   selector: 'app-login',
   imports: [FormsModule, CommonModule],
@@ -15,7 +17,7 @@ export class LoginComponent {
   };
   error = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, @Inject(AuthService) private authService: AuthService) {}
 
   onSubmit(event: Event) {
     event.preventDefault();
@@ -34,6 +36,7 @@ export class LoginComponent {
           this.credentials.password === 'customer123')
       ) {
         // Simulating successful customer login
+        this.authService.setCustomerEmail(this.credentials.email);
         this.router.navigate(['/customer']);
       } else {
         throw new Error('Invalid credentials');

@@ -1,0 +1,24 @@
+/* help-support.component.css */
+.dot {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .message-bubble {
+    max-width: 70%;
+    min-width: 200px;
+  }
+  
+  .hover-show {
+    transition: opacity 0.2s;
+  }
+  
+  .message-bubble:hover .hover-show {
+    opacity: 1 !important;
+  }
+  
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-bottom: 0;
+  }

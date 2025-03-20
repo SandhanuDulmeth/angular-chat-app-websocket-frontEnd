@@ -1,0 +1,111 @@
+<!-- help-support.component.html -->
+<div class="d-flex flex-column vh-100">
+    <!-- Header -->
+    <div class="border-bottom p-3 bg-light">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-primary text-white rounded-circle p-2">
+            <span class="fs-5">A</span>
+          </div>
+          <div>
+            <h3 class="mb-0">Admin Support</h3>
+            <small class="text-muted">Customer ID: {{ customerEmail }}</small>
+            <div class="d-flex align-items-center gap-2 mt-1">
+              <div [ngClass]="{
+                'bg-warning': isConnecting,
+                'bg-success': isConnected,
+                'bg-danger': !isConnected && !isConnecting
+              }" class="dot rounded-circle"></div>
+              <span [ngClass]="{
+                'text-warning': isConnecting,
+                'text-success': isConnected,
+                'text-danger': !isConnected && !isConnecting
+              }" class="small">
+                {{ isConnecting ? 'Connecting...' : (isConnected ? 'Connected' : 'Disconnected') }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <button (click)="checkConnection()" 
+                class="btn btn-sm"
+                [ngClass]="{
+                  'btn-warning': isConnecting,
+                  'btn-success': isConnected,
+                  'btn-danger': !isConnected && !isConnecting
+                }">
+          {{ isConnecting ? 'Connecting...' : (isConnected ? 'Connected' : 'Reconnect') }}
+        </button>
+      </div>
+      <div *ngIf="connectionError" class="alert alert-danger mt-2 p-2 small">
+        {{ connectionError }}
+      </div>
+    </div>
+  
+    <!-- Messages -->
+    <div #messagesContainer class="flex-grow-1 overflow-auto p-3 bg-white">
+      <div *ngIf="messages.length === 0" class="text-center text-muted h-100 d-flex align-items-center justify-content-center">
+        <div>
+          <h4>No messages yet</h4>
+          <p>Start a conversation with the admin</p>
+        </div>
+      </div>
+  
+      <div *ngFor="let msg of messages" class="mb-3">
+        <div [class.justify-content-end]="msg.user !== 'CUSTOMER'" class="d-flex">
+          <div [class.bg-light]="msg.user === 'CUSTOMER'" 
+               [class.bg-primary]="msg.user !== 'CUSTOMER'"
+               class="p-3 rounded position-relative message-bubble">
+            
+            <div *ngIf="editingMessageId !== msg.id">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <small class="fw-bold">{{ msg.user === 'CUSTOMER' ? 'Customer' : 'Admin' }}</small>
+                <small class="text-muted">
+                  {{ msg.timestamp | date:'shortTime' }}
+                </small>
+              </div>
+              <pre class="mb-0">{{ msg.content }}</pre>
+              
+              <div *ngIf="msg.user === 'CUSTOMER'" class="position-absolute top-0 end-0 p-1 opacity-0 hover-show">
+                <button (click)="startEditing(msg)" class="btn btn-sm btn-link text-dark">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button (click)="deleteMessage(msg.id)" class="btn btn-sm btn-link text-danger">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+  
+            <div *ngIf="editingMessageId === msg.id">
+              <textarea [(ngModel)]="editingContent" class="form-control mb-2"></textarea>
+              <div class="d-flex gap-2">
+                <button (click)="updateMessage()" class="btn btn-sm btn-success">
+                  Save
+                </button>
+                <button (click)="cancelEditing()" class="btn btn-sm btn-secondary">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Input Area -->
+    <div class="border-top p-3 bg-light">
+        <div class="input-group">
+          <textarea #messageInput
+                    [(ngModel)]="inputMessage"
+                    (keydown.enter)="handleEnterKey($event)"
+                    [disabled]="!isConnected"
+                    class="form-control"
+                    [placeholder]="isConnected ? 'Type your message...' : 'Connecting...'"
+                    rows="1"></textarea>
+          <button (click)="sendMessage()"
+                  [disabled]="!isConnected"
+                  class="btn btn-primary">
+            Send
+          </button>
+        </div>
+      </div>
+  </div>
