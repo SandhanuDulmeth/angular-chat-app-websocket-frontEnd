@@ -1,237 +1,28 @@
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Sidebar Styles */
-.sidebar {
-  width: 20rem;
-  background-color: #ffffff;
-  border-right: 1px solid #e5e7eb;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-header {
-  padding: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.sidebar-header h2 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #1f2937;
-}
-
-.connection-status {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.connection-status .status-indicator {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-}
-
-.connection-status .status-text {
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.customer-list {
-  overflow-y: auto;
-  height: calc(100vh - 4rem);
-}
-
-.customer-item {
-  padding: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.customer-item:hover {
-  background-color: #f9fafb;
-}
-
-.customer-item.selected {
-  background-color: #ebf8ff;
-  border-left: 4px solid #3b82f6;
-}
-
-.customer-item p {
-  font-weight: 500;
-  color: #1f2937;
-}
-
-/* Chat Area Styles */
-.chat-area {
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-}
-
-.chat-header {
-  padding: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: #ffffff;
-}
-
-.chat-header h2 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #1f2937;
-}
-
-.chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1rem;
-  background-color: #f3f4f6;
-}
-
-.chat-message {
-  display: flex;
-  margin-bottom: 1rem;
-}
-
-.chat-message.admin {
-  justify-content: flex-end;
-}
-
-.chat-message.customer {
-  justify-content: flex-start;
-}
-
-.message-content {
-  max-width: 70%;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  position: relative;
-}
-
-.message-content.admin {
-  background-color: #3b82f6;
-  color: #ffffff;
-}
-
-.message-content.customer {
-  background-color: #ffffff;
-  color: #1f2937;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.message-content .message-user {
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-}
-
-.message-content .message-text {
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.message-content .message-timestamp {
-  font-size: 0.75rem;
-  margin-top: 0.25rem;
-  opacity: 0.7;
-}
-
-.message-content .delete-button {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  font-size: 0.75rem;
-  color: #ef4444;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.message-content .delete-button:hover {
-  color: #dc2626;
-}
-
-/* Message Input Styles */
-.message-input {
-  padding: 1rem;
-  border-top: 1px solid #e5e7eb;
-  background-color: #ffffff;
-}
-
-.message-input .input-container {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.message-input textarea {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
-  resize: none;
-  min-height: 2.75rem;
-  max-height: 8rem;
-  overflow: hidden;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.message-input textarea:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-}
-
-.message-input button {
-  background-color: #3b82f6;
-  color: #ffffff;
-  padding: 0.5rem 1.5rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.message-input button:hover {
-  background-color: #2563eb;
-}
-
-.message-input button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-}
-
-/* No Customer Selected Styles */
-.no-customer-selected {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  color: #6b7280;
-  background-color: #f3f4f6;
-}
-
-.no-customer-selected .text-center {
-  text-align: center;
-}
-
-.no-customer-selected .text-lg {
-  font-size: 1.125rem;
-  margin-bottom: 0.5rem;
-}
-
-.no-customer-selected .text-sm {
-  font-size: 0.875rem;
-  color: #9ca3af;
-}
+.bg-chat {
+    background-color: #f8f9fa;
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 20px,
+        rgba(0, 0, 0, 0.03) 20px,
+        rgba(0, 0, 0, 0.03) 21px
+    );
+  }
+  
+  /* Custom scrollbar for messages area */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

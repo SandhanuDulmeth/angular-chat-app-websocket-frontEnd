@@ -14,7 +14,7 @@ interface ChatMessage {
   selector: 'app-admin-chat',
   imports: [FormsModule, CommonModule],
   templateUrl: './admin-chat.component.html',
-  styleUrls: ['./admin-chat.component.css']
+  styleUrls: ['./admin-chat.component.css'] // Ensure this path is correct
 })
 export class AdminChatComponent implements OnInit, OnDestroy {
   customers: string[] = [];
